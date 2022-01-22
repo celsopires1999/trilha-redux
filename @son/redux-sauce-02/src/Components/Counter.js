@@ -1,7 +1,7 @@
 import { Component } from "react"
 import { connect } from 'react-redux'
 import Proptypes from 'prop-types'
-import CounterAction from './../Redux/CounterRedux'
+import CounterAction from '../Redux/CounterRedux'
 
 class Counter extends Component {
     static propTypes = {
