@@ -1,7 +1,7 @@
 import { Field, reduxForm } from 'redux-form';
 
 // Component
-const InitForm = (props) => {
+const InitForm = ({ onClickSend, onChangeName }) => {
   return (
     <form>
       <div className="form-group">
@@ -12,11 +12,14 @@ const InitForm = (props) => {
           type="text"
           component="input"
           className="form-control"
+          onChange={onChangeName}
         />
       </div>
-      <div class="form-group">
-        <button className="btn btn-primary">
-            Send
+      <div className="form-group">
+        <button type="button" className="btn btn-primary"
+          onClick={onClickSend}
+        >
+          Send
         </button>
       </div>
     </form>
