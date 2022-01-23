@@ -13,9 +13,23 @@ const renderField = ({
     <label htmlFor="">{label}</label>
     <input {...input} placeholder={label} type={type} className="form-control" />
     {touched &&
-      (error && <span className="text-danger">{error}</span>)}
+      (
+        (warning && <span className="text-warning">{warning}</span>)
+        ||
+        (error && <span className="text-danger">{error}</span>)
+      )
+    }
   </div>
 )
+
+const warn = (values) => {
+  const warnings = {}
+  const { name } = values;
+
+  if (name && name.charAt(0) === '!') { warnings.name = 'No bang at the beginning' }
+
+  return warnings
+}
 
 const validate = (values) => {
   const errors = {}
@@ -23,7 +37,7 @@ const validate = (values) => {
 
   if (!name) { errors.name = 'Required' }
   if (name && name.toString().length <= 2) { errors.name = 'Too short' }
-  
+
   return errors
 }
 
@@ -76,5 +90,6 @@ export default connect(
 )(reduxForm({
   form: 'InitForm',
   enableReinitialize: true,
-  validate
+  validate,
+  warn
 })(InitForm));
