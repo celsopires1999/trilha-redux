@@ -8,5 +8,6 @@ services:
       - ./:/home/node/app
     ports:
       - 3000:3000
+      - 9000:9000
     command: ["tail", "-f", "/dev/null"] 
      

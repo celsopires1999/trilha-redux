@@ -63,7 +63,7 @@ class InitForm extends Component {
         </div>
         <div className="form-group">
           <button type="button" className="btn btn-primary"
-            onClick={onClickSend}
+            onClick={(e) => onClickSend(e, this.props.initialValues)}
           >
             Send
           </button>

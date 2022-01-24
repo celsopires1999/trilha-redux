@@ -1,16 +1,19 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import { sendServer, changeName } from '../actions';
 import InitForm from '../components/InitForm';
 
 // Container
 class App extends Component {
 
-  naClickada = (e) => {
+  naClickada = (e, data) => {
     e.preventDefault()
-    console.log("Deu clickada")
+    this.props.createName(data)
   }
 
   naMudancaNome = ({ target }) => {
     const { name, value } = target
+    this.props.changeName(value)
     console.log(`=> name: ${name} => value: ${value}`)
   }
 
@@ -37,4 +40,17 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    initialValues: state.name.data
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createName: (data) => dispatch(sendServer(data)),
+    changeName: (name) => dispatch(changeName(name))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (App);
